@@ -12,8 +12,21 @@ function Exercise1() {
   );
 }
 function Alert({ type, children }) {
-       
-    return <div className="alert">{children}</div>;
+  let color;
+
+  if(type === "success") {
+    color = "green"
+  } else if(type === "error") {
+    color = "red"
+  } else if (type === "warning") {
+    color = "orange"
   }
+  return (
+    <div className="alert" style={{ color: color }}>
+      {children}
+    </div>
+  );
+}
+    
   
   export default Exercise1;

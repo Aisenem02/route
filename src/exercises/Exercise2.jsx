@@ -1,28 +1,46 @@
-function Exercise2() {
-  return (
-    <div className="exercise">
-      <h1 className="exercise__title">Задание 2</h1>
-      <Pagination from={1} to={5} />
-    </div>
-  );
-}
-/*
-Создать кнопки страниц от указанного числа
-в пропсе from до пропса to.
-При клике на одну из кнопок, надо сменить номер страницы
-в теге p  на соответствующее число.
-*/
-function Pagination({ from, to }) {
+import React from 'react'
+const Exercise2 = () => {
+  const [range, setRange] = React.useState([3, 5])
+  const [activePage, setActivePage] = React.useState(range[0])
+  let start = range[0]; // 3
+  let end = range[1]; // 5
+
+  const pages = []
+
+  for(let i = start; i <= end; i++) {
+    pages.push((
+      <button key={i} onClick={() => setActivePage(i)}>
+        {i}
+      </button>
+    ))
+  }
+
+  const handleClick = () => {
+    setRange([start, end])
+  }
+
   return (
     <div>
-      <p>Страница: 1</p>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>4</button>
-      <button>5</button>
+      <p>Страница {activePage}</p>
+      <input
+        placeholder="От"
+        onChange={(e) => {
+          start = +e.target.value
+        }}
+      />
+      <input
+        placeholder="До"
+        onChange={(e) => {
+          end = +e.target.value
+        }}
+      />
+      <button onClick={handleClick}>Показать</button>
+      <div>
+        {pages}
+      </div>
     </div>
   );
-}
+};
+
 
 export default Exercise2
